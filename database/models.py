@@ -1,33 +1,42 @@
-import os
+from peewee import (
+    CharField,
+    IntegerField,
+    Model,
+    SqliteDatabase
+)
 
-from peewee import *
-import datetime
-from dotenv import load_dotenv, find_dotenv
+from config_data.config import DB_NAME
 
-DATABASE_NAME = "make_up_bot"
-USER = os.getenv("USER_DB")
-PASSWORD = os.getenv("PASSWORD_DB")
-dbhandle = MySQLDatabase(DATABASE_NAME, user=USER,
-                         password=PASSWORD,
-                         host='localhost')
+db = SqliteDatabase(DB_NAME)
 
 
 class BaseModel(Model):
-    """Базовая модель для работы с Peewee"""
+    """Базования модель"""
 
     class Meta:
-        database = dbhandle
+        database = db
 
 
-class Category(BaseModel):
-    """Класс, для описания таблица в базе"""
-    id = PrimaryKeyField(null=False)  # поле автоматического прироста
-    name = CharField(max_length=100)  # содержит имя пользователя(еп_шв)
+class User(BaseModel):
+    """Класс описывающий, таблицу о пользователе в базе данных"""
 
-    # поля timestamp, которые определяют настоящее время по умолчанию
-    created_at = DateTimeField(default=datetime.datetime.now())
-    updated_at = DateTimeField(default=datetime.datetime.now())
+    user_id = IntegerField(unique=True)
+    username = CharField()
+    first_name = CharField()
 
-    class Meta:
-        db_table = "categories"
-        order_by = ('created_at',)
+    def __str__(self):
+        return self.user_id
+
+
+class Favourity(BaseModel):
+    """Модель избранных товаров или условию"""
+
+    user_id = IntegerField(null=False)
+    brand = CharField(null=True)
+    product_tag = CharField(null=True)
+    product_type = CharField(null=True)
+    id_product = CharField(null=True)
+
+
+def create_models():
+    db.create_tables(BaseModel.__subclasses__())
