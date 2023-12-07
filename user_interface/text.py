@@ -7,12 +7,13 @@ MAIN_COMMANDS = f"\n\n {emoji.start_condition['brand']} /brand - Выбрать 
 SEARCH_COMMANDS = f"\n\n{emoji.search_condition['high']} /high - Установить максимальную цену или рейтинг" \
                   f"\n\n{emoji.search_condition['low']} /low - Установить минимальную цену или рейтинг"
 
-CUSTOM_COMMANDS = f"\n\n{emoji.addition_condition['add']} /add - Добавить в избранное"\
+CUSTOM_COMMANDS = f"\n\n{emoji.addition_condition['favorite']} /favorite - Добавить в избранное"\
                   f"\n\n{emoji.addition_condition['start_again']} /start_again - Начать заново"
 
-FAV_COMMANDS = f"\n\n{emoji.addition_condition['favourite']} /favourite - Узнать добавление в избранное"
+FAV_COMMANDS = f"\n\n{emoji.addition_condition['favorite']} /my_favorites - Узнать добавление в избранное"
 
-START_MSG = "Добро пожаловать в наш бот для поиска товаров!" \
+
+START_MSG = "Добро пожаловать в телеграмм-бот!" \
             "\n\n Выберите условие для начала поиска: " + MAIN_COMMANDS
 
 HELP_MSG = "Список доступных команд:" + MAIN_COMMANDS + FAV_COMMANDS
@@ -25,7 +26,5 @@ DESCRIPTION = "Описание товара:" \
 
 USER_HANDLER = "Что будем искать? " \
                "\n\n Напиши условие поиска."
-
-
 
 START_OVER = "Начать поиск заново"
