@@ -11,14 +11,14 @@ db = SqliteDatabase(DB_NAME)
 
 
 class BaseModel(Model):
-    """Базования модель"""
+    """Base Model"""
 
     class Meta:
         database = db
 
 
 class User(BaseModel):
-    """Класс описывающий, таблицу о пользователе в базе данных"""
+    """Model of users"""
 
     user_id = IntegerField(unique=True)
     username = CharField()
@@ -26,15 +26,6 @@ class User(BaseModel):
 
     def __str__(self):
         return self.user_id
-
-
-class Favorite(BaseModel):
-    """Модель избранных товаров или условию"""
-
-    user_id = IntegerField(null=False)
-    brand = CharField(null=True)
-    product_tag = CharField(null=True)
-    product_type = CharField(null=True)
 
 
 def create_models():
